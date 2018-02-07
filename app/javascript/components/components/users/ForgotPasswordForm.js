@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class ForgotPasswordForm extends React.Component {
 
@@ -31,11 +32,15 @@ export default class ForgotPasswordForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.renderInputs()}<br />
+                {this.renderInputs()}
+                <input type="submit" style={{visibility: 'hidden'}} /><br />
 
-                <input type="submit" style={{visibility: 'hidden'}} />
                 <button type="submit" onClick={this.handleSubmit.bind(this)}>Reset Password</button>
             </form>
         );
     }
 }
+
+ForgotPasswordForm.propTypes = {
+    redirectUrl: PropTypes.string.isRequired
+};

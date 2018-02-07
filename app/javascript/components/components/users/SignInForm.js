@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import AuthApi from '../../../api/authApi';
 
 export default class SignInForm extends React.Component {
 
@@ -23,7 +26,11 @@ export default class SignInForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log(this.state)
+        AuthApi.signIn(this.state.email, this.state.password, this.state.rememberMe).then( response => {
+            window.location.href = this.props.redirectUrl;
+        }).catch( response => {
+            console.log(response);
+        });
     }
 
     renderInputs() {
@@ -39,11 +46,15 @@ export default class SignInForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.renderInputs()}<br />
+                {this.renderInputs()}
+                <input type="submit" style={{visibility: 'hidden'}} /><br />
 
-                <input type="submit" style={{visibility: 'hidden'}} />
                 <button type="submit">Sign In</button>
             </form>
         );
     }
 }
+
+SignInForm.propTypes = {
+    redirectUrl: PropTypes.string.isRequired
+};

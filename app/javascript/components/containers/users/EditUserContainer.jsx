@@ -8,7 +8,7 @@ export default class EditUserContainer extends React.Component {
     render() {
         return (
             <div>
-                <EditUserForm />
+                <EditUserForm redirectUrl="/" />
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class RegisterForm extends React.Component {
 
@@ -35,11 +36,15 @@ export default class RegisterForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.renderInputs()}<br />
+                {this.renderInputs()}
+                <input type="submit" style={{visibility: 'hidden'}} /><br />
 
-                <input type="submit" style={{visibility: 'hidden'}} />
                 <button type="submit">Register</button>
             </form>
         );
     }
 }
+
+RegisterForm.propTypes = {
+    redirectUrl: PropTypes.string.isRequired
+};
