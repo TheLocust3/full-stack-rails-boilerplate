@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AuthApi from '../../../api/authApi';
+import AuthApi from '../../../api/auth-api';
 
 export default class RegisterForm extends React.Component {
 

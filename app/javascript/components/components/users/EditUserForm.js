@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import AuthApi from '../../../api/auth-api';
+
 export default class EditUserForm extends React.Component {
 
     constructor(props) {
@@ -18,7 +20,11 @@ export default class EditUserForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log(this.state)
+        AuthApi.editUser(this.state.email, this.state.currentPassword, this.state.password, this.state.passwordConfirmation, this.state.firstName, this.state.firstName).then( response => {
+            window.location.href = this.props.redirectUrl;
+        }).catch( response => {
+            console.log(response);
+        });
     }
 
     renderInputs() {
