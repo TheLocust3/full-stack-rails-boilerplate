@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -12,6 +13,13 @@ import SignInContainer from '../components/containers/users/SignInContainer';
 import SignUpContainer from '../components/containers/users/SignUpContainer';
 import ForgotPasswordContainer from '../components/containers/users/ForgotPasswordContainer';
 import EditUserContainer from '../components/containers/users/EditUserContainer';
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    dataType: 'json'
+});
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 

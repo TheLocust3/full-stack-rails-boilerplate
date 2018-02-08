@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import AuthApi from '../../../api/authApi';
+
 export default class RegisterForm extends React.Component {
 
     constructor(props) {
@@ -18,7 +20,11 @@ export default class RegisterForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log(this.state)
+        AuthApi.register(this.state.email, this.state.password, this.state.passwordConfirmation, this.state.firstName, this.state.lastName).then( response => {
+            window.location.href = this.props.redirectUrl;
+        }).catch( response => {
+            console.log(response);
+        });
     }
 
     renderInputs() {
