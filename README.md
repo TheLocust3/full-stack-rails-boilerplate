@@ -6,7 +6,8 @@ A skeleton project that will get you up and running with:
 - React Router
 
 ### To-Do
-- Skeleton unit tests
 - Devise
+ - Reset password page
+- Skeleton unit tests
 - GraphQL?
 - Relay?

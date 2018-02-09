@@ -8,7 +8,7 @@ export default class EditUserForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: null, firstName: null, lastName: null };
+        this.state = { email: this.props.user.email, firstName: this.props.user.first_name, lastName: this.props.user.last_name };
     }
 
     handleChange(event) {
@@ -20,7 +20,7 @@ export default class EditUserForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        AuthApi.editUser(this.state.email, this.state.currentPassword, this.state.password, this.state.passwordConfirmation, this.state.firstName, this.state.firstName).then( response => {
+        AuthApi.editUser(this.state.email, this.state.currentPassword, this.state.password, this.state.passwordConfirmation, this.state.firstName, this.state.lastName).then( response => {
             window.location.href = this.props.redirectUrl;
         }).catch( response => {
             console.log(response);
@@ -30,9 +30,9 @@ export default class EditUserForm extends React.Component {
     renderInputs() {
         return (
             <div>
-                Email:&nbsp;<input type="email" name="email" onChange={this.handleChange.bind(this)} /><br /><br />
-                First Name:&nbsp;<input type="text" name="firstName" onChange={this.handleChange.bind(this)} /><br /><br />
-                Last Name:&nbsp;<input type="text" name="lastName" onChange={this.handleChange.bind(this)} /><br /><br /><br />
+                Email:&nbsp;<input type="email" name="email" onChange={this.handleChange.bind(this)} defaultValue={this.state.email} /><br /><br />
+                First Name:&nbsp;<input type="text" name="firstName" onChange={this.handleChange.bind(this)} defaultValue={this.state.firstName} /><br /><br />
+                Last Name:&nbsp;<input type="text" name="lastName" onChange={this.handleChange.bind(this)} defaultValue={this.state.lastName} /><br /><br /><br />
                 Current Password:&nbsp;<input type="password" name="currentPassword" onChange={this.handleChange.bind(this)} /><br /><br />
                 New Password:&nbsp;<input type="password" name="password" onChange={this.handleChange.bind(this)} /><br /><br />
                 New Password Confirmation:&nbsp;<input type="password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
@@ -53,5 +53,6 @@ export default class EditUserForm extends React.Component {
 }
 
 EditUserForm.propTypes = {
-    redirectUrl: PropTypes.string.isRequired
+    redirectUrl: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired
 };

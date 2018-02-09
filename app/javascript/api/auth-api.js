@@ -4,7 +4,7 @@ let AuthApi = {
 
     signIn(email, password, rememberMe) {
         return new Promise((resolve, reject) => {
-            $.ajax('/users/sign_in', {
+            $.ajax('/api/users/sign_in', {
                 type: 'post',
                 data: { user: { email: email, password: password, remember_me: rememberMe } },
                 success: resolve,
@@ -15,7 +15,7 @@ let AuthApi = {
 
     signOut() {
         return new Promise((resolve, reject) => {
-            $.ajax('/users/sign_out', {
+            $.ajax('/api/users/sign_out', {
                 type: 'delete',
                 success: resolve,
                 error: reject
@@ -25,7 +25,7 @@ let AuthApi = {
 
     register(email, password, passwordConfirmation, firstName, lastName) {
         return new Promise((resolve, reject) => {
-            $.ajax('/users', {
+            $.ajax('/api/users', {
                 type: 'post',
                 data: { user: { email: email, password: password, password_confirmation: passwordConfirmation, first_name: firstName, last_name: lastName } },
                 success: resolve,
@@ -36,7 +36,7 @@ let AuthApi = {
 
     editUser(email, currentPassword, password, passwordConfirmation, firstName, lastName) {
         return new Promise((resolve, reject) => {
-            $.ajax('/users', {
+            $.ajax('/api/users', {
                 type: 'patch',
                 data: { user: { email: email, current_password: currentPassword, password: password, password_confirmation: passwordConfirmation, first_name: firstName, last_name: lastName } },
                 success: resolve,
@@ -47,7 +47,7 @@ let AuthApi = {
 
     forgotPassword(email) {
         return new Promise((resolve, reject) => {
-            $.ajax('/users/password', {
+            $.ajax('/api/users/password', {
                 type: 'post',
                 data: { user: { email: email } },
                 success: resolve,
