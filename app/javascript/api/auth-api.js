@@ -54,6 +54,17 @@ let AuthApi = {
                 error: reject
             });
         });
+    },
+
+    resetPassword(token, password, passwordConfirmation) {
+        return new Promise((resolve, reject) => {
+            $.ajax('/api/users/password', {
+                type: 'patch',
+                data: { user: { reset_password_token: token, password: password, password_confirmation: passwordConfirmation } },
+                success: resolve,
+                error: reject
+            });
+        });
     }
 };
 
