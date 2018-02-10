@@ -8,7 +8,7 @@ export default class ForgotPasswordForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: null };
+        this.state = { email: null, errors: {} };
     }
 
     handleChange(event) {
@@ -23,14 +23,16 @@ export default class ForgotPasswordForm extends React.Component {
         AuthApi.forgotPassword(this.state.email).then( response => {
             window.location.href = this.props.redirectUrl;
         }).catch( response => {
-            console.log(response);
+            this.setState({
+                errors: response.responseJSON.errors
+            });
         });
     }
 
     renderInputs() {
         return (
             <div>
-                Email:&nbsp;<input type="email" name="email" onChange={this.handleChange.bind(this)} />
+                Email:&nbsp;<input type="email" name="email" onChange={this.handleChange.bind(this)} /> {this.state.errors.email}
             </div>
         );
     }

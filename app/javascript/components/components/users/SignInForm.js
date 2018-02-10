@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,7 +9,7 @@ export default class SignInForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: null, password: null, rememberMe: false };
+        this.state = { email: null, password: null, rememberMe: false, error: "" };
     }
 
     handleChange(event) {
@@ -29,8 +30,20 @@ export default class SignInForm extends React.Component {
         AuthApi.signIn(this.state.email, this.state.password, this.state.rememberMe).then( response => {
             window.location.href = this.props.redirectUrl;
         }).catch( response => {
-            console.log(response);
+            this.setState({
+                error: response.responseJSON.error
+            });
         });
+    }
+
+    renderError() {
+        if (_.isEmpty(this.state.error)) return;
+
+        return (
+            <div>
+                {this.state.error}
+            </div>
+        )
     }
 
     renderInputs() {
@@ -50,6 +63,7 @@ export default class SignInForm extends React.Component {
                 <input type="submit" style={{visibility: 'hidden'}} /><br />
 
                 <button type="submit">Sign In</button>
+                {this.renderError()}
             </form>
         );
     }
