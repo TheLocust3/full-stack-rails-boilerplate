@@ -83,23 +83,64 @@ resource "aws_security_group" "db_security_group" {
   }
 }
 
-data "aws_iam_role" "ec2-role" {
-  name = "${var.name}"
-  role_name = "${var.name}" // need to have both or it will fail
+
+data "aws_iam_policy_document" "ec2-role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
 }
 
-data "aws_iam_role" "deployment" {
-  name = "deployment"
-  role_name = "deployment"
+resource "aws_iam_role" "ec2-role" {
+  name = "${var.name}-ec2"
+  assume_role_policy = "${data.aws_iam_policy_document.ec2-role.json}"
 }
+
+resource "aws_iam_role_policy_attachment" "ec2-role-for-codedeploy" {
+  role = "${aws_iam_role.ec2-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
+}
+
+resource "aws_iam_instance_profile" "ec2-profile" {
+  name  = "${var.name}_profile"
+  role = "${aws_iam_role.ec2-role.name}"
+}
+
+
+data "aws_iam_policy_document" "codedeploy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "Service"
+      identifiers = ["codedeploy.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "deployment" {
+  name = "${var.name}-deployment"
+
+  assume_role_policy = "${data.aws_iam_policy_document.codedeploy.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "deployment" {
+  role = "${aws_iam_role.deployment.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
+}
+
 
 resource "aws_instance" "instance" {
   ami = "${data.aws_ami.image.id}"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.security_group.id}"]
   associate_public_ip_address = true
-  iam_instance_profile = "${data.aws_iam_role.ec2-role.role_name}"
-  key_name = "${var.name} Key"
+  iam_instance_profile = "${aws_iam_instance_profile.ec2-profile.name}"
+  key_name = "${var.name}"
 
   tags {
     Name = "${var.name}"
@@ -129,7 +170,7 @@ resource "aws_codedeploy_app" "application" {
 resource "aws_codedeploy_deployment_group" "deployment" {
   app_name = "${aws_codedeploy_app.application.name}"
   deployment_group_name = "production"
-  service_role_arn = "${data.aws_iam_role.deployment.arn}"
+  service_role_arn = "${aws_iam_role.deployment.arn}"
 
   ec2_tag_filter {
     type = "KEY_AND_VALUE"
