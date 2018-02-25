@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+# TODO: Setup codedeploy and other root services
+
+# install updated version of ruby build
+sudo apt-get install -y rbenv ruby-build autoconf bison
+mkdir -p ~/.rbenv/plugins
+cd ~/.rbenv/plugins
+rm -rf ruby-build/
+git clone https://github.com/sstephenson/ruby-build.git # update ruby-build definitions
+
+# install npm and updated version of nodejs
+sudo apt-get install -y npm libpq-dev
+
+sudo npm install --global n
+sudo n 8.6.0
+sudo ln -sf /usr/local/n/versions/node/8.6.0/bin/node /usr/bin/nodejs

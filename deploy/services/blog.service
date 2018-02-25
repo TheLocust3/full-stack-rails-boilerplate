@@ -1,0 +1,19 @@
+[Unit]
+Description=blog - run blog rails server
+After=network.target
+
+[Service]
+EnvironmentFile=/home/ubuntu/secrets.env
+Environment=PATH=/home/ubuntu/.rbenv/versions/2.5.0/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+Environment=DISABLE_SPRING=true
+Environment=RAILS_ENV=production
+WorkingDirectory=/home/ubuntu/blog
+TimeoutStartSec=300
+
+ExecStartPre=/home/ubuntu/blog/bin/rake db:create
+ExecStartPre=/home/ubuntu/blog/bin/rake db:migrate
+ExecStartPre=/home/ubuntu/blog/bin/rake db:seed
+ExecStart=/home/ubuntu/blog/bin/rails server puma -e production -p 80
+
+[Install]
+WantedBy=default.target
