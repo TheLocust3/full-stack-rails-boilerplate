@@ -1,3 +1,3 @@
 #!/bin/bash
 
-systemctl stop blog.service
+systemctl stop rails.service

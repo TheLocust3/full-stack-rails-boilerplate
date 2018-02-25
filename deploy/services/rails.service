@@ -1,0 +1,20 @@
+[Unit]
+Description=rails - run rails server
+After=network.target
+
+[Service]
+EnvironmentFile=/home/ubuntu/secrets.env
+Environment=PATH=/home/ubuntu/.rbenv/versions/2.5.0/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+Environment=DISABLE_SPRING=true
+Environment=RAILS_SERVE_STATIC_FILES=true
+Environment=RAILS_ENV=production
+WorkingDirectory=/home/ubuntu/rails
+TimeoutStartSec=300
+
+ExecStartPre=/home/ubuntu/rails/bin/rake db:create
+ExecStartPre=/home/ubuntu/rails/bin/rake db:migrate
+ExecStartPre=/home/ubuntu/rails/bin/rake db:seed
+ExecStart=/home/ubuntu/rails/bin/rails server puma -e production -p 80
+
+[Install]
+WantedBy=default.target

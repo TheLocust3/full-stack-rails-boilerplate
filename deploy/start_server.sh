@@ -2,4 +2,4 @@
 
 set -e
 
-systemctl restart blog.service
+systemctl restart rails.service
