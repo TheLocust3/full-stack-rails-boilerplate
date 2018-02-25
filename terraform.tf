@@ -11,7 +11,7 @@ variable "username" {
 }
 
 data "aws_ami" "image" {
-  name_regex = "${var.name}-" // matches NAME-DATE
+  name_regex = "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server"
   most_recent = true
 }
 
@@ -185,6 +185,10 @@ output "instance_ip" {
 
 output "database_username" {
   value = "${aws_db_instance.db_instance.username}"
+}
+
+output "database_address" {
+  value = "${aws_db_instance.db_instance.address}"
 }
 
 output "database_password" {

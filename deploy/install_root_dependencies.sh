@@ -2,7 +2,9 @@
 
 set -e
 
-# TODO: Setup codedeploy and other root services
+cd /home/ubuntu
+
+sudo apt-get update
 
 # install updated version of ruby build
 sudo apt-get install -y rbenv ruby-build autoconf bison

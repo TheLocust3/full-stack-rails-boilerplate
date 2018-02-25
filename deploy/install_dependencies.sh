@@ -20,7 +20,6 @@ sudo systemctl enable rails.service
 # correct ruby version
 sudo rbenv install -s $RUBY_VERSION
 sudo chmod 777 -R /home/ubuntu/.rbenv/versions/$RUBY_VERSION
-
 export PATH=/home/ubuntu/.rbenv/versions/$RUBY_VERSION/bin:$PATH
 
 sudo npm install --global yarn
