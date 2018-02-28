@@ -6,6 +6,13 @@ A skeleton project that runs:
 - React Router
 - Terraform
 - AWS CodeDeploy
+- Nginx + Certbot
+
+### Production Setup
+To run the simple HTTP server, in `deploy/start_server.sh` uncomment `systemctl restart rails.service` (do the same in `deploy/stop_server.rb`)  
+  
+Running the full Nginx HTTPS server is more complicated. First you need to obtain an HTTPS certificate for your domain:
+`sudo certbot certonly --nginx -d example.com -d www.example.com`
 
 ### Terraform Setup
 To use Terraform, open `terraform.tf` and change the variables name, username, and provider to your custom values. Make a note of the name, this will be used for CodeDeploy setup.
