@@ -9,9 +9,6 @@ source /home/ubuntu/rails/deploy/install_root_dependencies.sh
 sudo chmod 777 -R /home/ubuntu/rails
 cd /home/ubuntu/rails
 
-# pull secrets
-export $(cat /home/ubuntu/secrets.env | xargs)
-
 # setup services
 ls deploy/services | xargs -i sudo install -m u+rw,ugo-x,go-w,go+r deploy/services/"{}" "/lib/systemd/system/{}"
 sudo systemctl daemon-reload
@@ -27,6 +24,9 @@ gem install bundler
 
 # setup server
 cd /home/ubuntu/rails
+
+# pull secrets
+export $(cat /home/ubuntu/secrets.env | xargs)
 
 bundle install
 

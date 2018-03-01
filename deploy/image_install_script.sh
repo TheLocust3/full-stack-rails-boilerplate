@@ -6,7 +6,7 @@ set -e
 
 # install codedeploy
 sudo apt-get update
-sudo apt-get install ruby wget
+sudo apt-get install -y ruby wget
 wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
 chmod +x ./install
 sudo ./install auto
