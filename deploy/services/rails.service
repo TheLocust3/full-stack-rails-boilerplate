@@ -14,7 +14,7 @@ TimeoutStartSec=300
 ExecStartPre=/home/ubuntu/rails/bin/rake db:create
 ExecStartPre=/home/ubuntu/rails/bin/rake db:migrate
 ExecStartPre=/home/ubuntu/rails/bin/rake db:seed
-ExecStart=/home/ubuntu/rails/bin/rails server puma -e production -p 80
+ExecStart=/home/ubuntu/rails/bin/rails server puma -e production -b /home/ubuntu/rails.sock
 
 [Install]
 WantedBy=default.target

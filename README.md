@@ -11,8 +11,10 @@ A skeleton project that runs:
 ### Production Setup
 To run the simple HTTP server, in `deploy/start_server.sh` uncomment `systemctl restart rails.service` (do the same in `deploy/stop_server.rb`)  
   
-Running the full Nginx HTTPS server is more complicated. First you need to obtain an HTTPS certificate for your domain:
+Running the full Nginx HTTPS server is more complicated. First you need to obtain an HTTPS certificate for your domain and setup Nginx:
 `sudo certbot certonly --nginx -d example.com -d www.example.com`
+  
+This will generate your certificate, and create an a configuration file for Nginx that can be found at `/etc/nginx/sites-available/default`. To configure it for your domain, replace this file with `deploy/nginx` in the repository and replace `EXAMPLE` with your domain. Make sure that both `Nginx.service` and 'rails.service' are running and the server should work with HTTPS.
 
 ### Terraform Setup
 To use Terraform, open `terraform.tf` and change the variables name, username, and provider to your custom values. Make a note of the name, this will be used for CodeDeploy setup.

@@ -20,7 +20,7 @@ sudo npm install --global n
 sudo n 8.6.0
 sudo ln -sf /usr/local/n/versions/node/8.6.0/bin/node /usr/bin/nodejs
 
-# setup nginx
+# setup nginx + passenger
 sudo apt-get install -y nginx
 
 # setup certbot
