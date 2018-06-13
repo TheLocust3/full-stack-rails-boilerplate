@@ -1,7 +1,5 @@
 import * as UserActions from '../actions/user-actions';
 
-import { combineReducers } from 'redux';
-
 const initialState = {
     isReady: false,
     currentUser: {},
@@ -18,7 +16,7 @@ export function userReducer(state = initialState, action) {
         case UserActions.RECEIVE_CURRENT_USER:
             return Object.assign({}, state, {
                 isReady: true,
-                user: action.data
+                currentUser: action.data
             });
         default:
             return state;
