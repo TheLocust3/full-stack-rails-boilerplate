@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 let UserApi = {
-
     getCurrentUser() {
         return new Promise((resolve, reject) => {
             $.ajax('/api/users', {
@@ -13,4 +12,4 @@ let UserApi = {
     }
 };
 
-export default UserApi
+export default UserApi;

@@ -7,33 +7,37 @@ import { fetchCurrentUser } from '../actions/user-actions';
 import AuthApi from '../../api/auth-api';
 
 class Index extends React.Component {
-
     componentWillMount() {
         this.props.dispatch(fetchCurrentUser());
     }
 
     handleSignOut() {
-        AuthApi.signOut().then( (response) => {
+        AuthApi.signOut().then((response) => {
             window.location.href = '/';
-        })
+        });
     }
 
     renderUserActions() {
         if (_.isEmpty(this.props.user)) {
             return (
                 <div>
-                    <Link to="/sign_in">Sign In</Link>&nbsp;|&nbsp;
+                    <Link to="/sign_in">Sign In</Link>
+                    &nbsp;|&nbsp;
                     <Link to="/sign_up">Sign Up</Link>
                 </div>
-            )
+            );
         } else {
             return (
                 <div>
-                    <Link to="/users/edit">Edit User</Link>&nbsp;|&nbsp;
-                    <a href="" onClick={this.handleSignOut.bind(this)}>Sign Out</a><br />
+                    <Link to="/users/edit">Edit User</Link>
+                    &nbsp;|&nbsp;
+                    <a href="" onClick={this.handleSignOut.bind(this)}>
+                        Sign Out
+                    </a>
+                    <br />
                     Hello {this.props.user.first_name} {this.props.user.last_name}!
                 </div>
-            )
+            );
         }
     }
 
@@ -42,7 +46,8 @@ class Index extends React.Component {
 
         return (
             <div>
-                {this.renderUserActions()}<br />
+                {this.renderUserActions()}
+                <br />
                 Hello World!
             </div>
         );

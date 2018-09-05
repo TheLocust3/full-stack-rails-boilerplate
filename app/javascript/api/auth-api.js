@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 let AuthApi = {
-
     signIn(email, password, rememberMe) {
         return new Promise((resolve, reject) => {
             $.ajax('/api/users/sign_in', {
@@ -27,7 +26,15 @@ let AuthApi = {
         return new Promise((resolve, reject) => {
             $.ajax('/api/users', {
                 type: 'post',
-                data: { user: { email: email, password: password, password_confirmation: passwordConfirmation, first_name: firstName, last_name: lastName } },
+                data: {
+                    user: {
+                        email: email,
+                        password: password,
+                        password_confirmation: passwordConfirmation,
+                        first_name: firstName,
+                        last_name: lastName
+                    }
+                },
                 success: resolve,
                 error: reject
             });
@@ -38,7 +45,16 @@ let AuthApi = {
         return new Promise((resolve, reject) => {
             $.ajax('/api/users', {
                 type: 'patch',
-                data: { user: { email: email, current_password: currentPassword, password: password, password_confirmation: passwordConfirmation, first_name: firstName, last_name: lastName } },
+                data: {
+                    user: {
+                        email: email,
+                        current_password: currentPassword,
+                        password: password,
+                        password_confirmation: passwordConfirmation,
+                        first_name: firstName,
+                        last_name: lastName
+                    }
+                },
                 success: resolve,
                 error: reject
             });
@@ -68,4 +84,4 @@ let AuthApi = {
     }
 };
 
-export default AuthApi
+export default AuthApi;

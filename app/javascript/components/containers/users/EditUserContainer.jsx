@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import EditUserForm from '../../components/users/EditUserForm';
 import { fetchCurrentUser } from '../../actions/user-actions';
 
 class EditUserContainer extends React.Component {
-
     componentWillMount() {
         this.props.dispatch(fetchCurrentUser());
     }
