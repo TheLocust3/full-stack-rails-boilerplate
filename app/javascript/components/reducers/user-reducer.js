@@ -2,9 +2,7 @@ import * as UserActions from '../actions/user-actions';
 
 const initialState = {
     isReady: false,
-    currentUser: {},
-    user: {},
-    users: []
+    currentUser: {}
 };
 
 export function userReducer(state = initialState, action) {

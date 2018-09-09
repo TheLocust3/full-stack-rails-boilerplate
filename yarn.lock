@@ -3130,7 +3130,24 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jquery@^3.3.1:
+j-toker@^0.0.10-beta3:
+  version "0.0.10-beta3"
+  resolved "https://registry.yarnpkg.com/j-toker/-/j-toker-0.0.10-beta3.tgz#37380689d5d7663e50b741be6c4639b1792d04e7"
+  dependencies:
+    jquery ">1.11.2"
+    jquery-deparam "^0.1.0"
+    jquery.cookie "^1.4.1"
+    pubsub-js "^1.5.2"
+
+jquery-deparam@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/jquery-deparam/-/jquery-deparam-0.1.0.tgz#eaa60c1699fab7637d1acb8d2a08c72d095a0b96"
+
+jquery.cookie@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jquery.cookie/-/jquery.cookie-1.4.1.tgz#d63dce209eab691fe63316db08ca9e47e0f9385b"
+
+jquery@>1.11.2, jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
@@ -4685,6 +4702,10 @@ public-encrypt@^4.0.0:
     create-hash "^1.1.0"
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
+
+pubsub-js@^1.5.2:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.6.1.tgz#4548fefc9b558380b9bbd0f76bef3c11206ad09d"
 
 pump@^1.0.0:
   version "1.0.3"

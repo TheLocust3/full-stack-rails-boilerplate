@@ -1,86 +1,66 @@
 import $ from 'jquery';
 
 let AuthApi = {
-    signIn(email, password, rememberMe) {
-        return new Promise((resolve, reject) => {
-            $.ajax('/api/users/sign_in', {
-                type: 'post',
-                data: { user: { email: email, password: password, remember_me: rememberMe } },
-                success: resolve,
-                error: reject
-            });
+    signIn(email, password) {
+        return $.auth.emailSignIn({
+            email: email,
+            password: password
         });
     },
 
     signOut() {
-        return new Promise((resolve, reject) => {
-            $.ajax('/api/users/sign_out', {
-                type: 'delete',
-                success: resolve,
-                error: reject
-            });
-        });
+        return $.auth.signOut();
     },
 
     register(email, password, passwordConfirmation, firstName, lastName) {
-        return new Promise((resolve, reject) => {
-            $.ajax('/api/users', {
-                type: 'post',
-                data: {
-                    user: {
-                        email: email,
-                        password: password,
-                        password_confirmation: passwordConfirmation,
-                        first_name: firstName,
-                        last_name: lastName
-                    }
-                },
-                success: resolve,
-                error: reject
-            });
+        return $.auth.emailSignUp({
+            email: email,
+            password: password,
+            password_confirmation: passwordConfirmation,
+            first_name: firstName,
+            last_name: lastName
         });
     },
 
-    editUser(email, currentPassword, password, passwordConfirmation, firstName, lastName) {
-        return new Promise((resolve, reject) => {
-            $.ajax('/api/users', {
-                type: 'patch',
-                data: {
-                    user: {
-                        email: email,
-                        current_password: currentPassword,
-                        password: password,
-                        password_confirmation: passwordConfirmation,
-                        first_name: firstName,
-                        last_name: lastName
-                    }
-                },
-                success: resolve,
-                error: reject
-            });
+    editUser(email, password, passwordConfirmation, firstName, lastName) {
+        let hash = {};
+        if (!_.isEmpty(email)) {
+            hash.email = email;
+        }
+
+        if (!_.isEmpty(firstName)) {
+            hash.first_name = firstName;
+        }
+
+        if (!_.isEmpty(lastName)) {
+            hash.last_name = lastName;
+        }
+
+        return $.auth.updateAccount(hash).then((user) => {
+            if (!_.isEmpty(password)) {
+                return $.auth.updatePassword({
+                    password: password,
+                    password_confirmation: passwordConfirmation
+                });
+            }
         });
     },
 
     forgotPassword(email) {
-        return new Promise((resolve, reject) => {
-            $.ajax('/api/users/password', {
-                type: 'post',
-                data: { user: { email: email } },
-                success: resolve,
-                error: reject
-            });
+        return $.auth.requestPasswordReset({
+            email: email
         });
     },
 
-    resetPassword(token, password, passwordConfirmation) {
-        return new Promise((resolve, reject) => {
-            $.ajax('/api/users/password', {
-                type: 'patch',
-                data: { user: { reset_password_token: token, password: password, password_confirmation: passwordConfirmation } },
-                success: resolve,
-                error: reject
-            });
+    resetPassword(password, passwordConfirmation) {
+        return $.auth.updatePassword({
+            password: password,
+            password_confirmation: passwordConfirmation
         });
+    },
+
+    getCurrentUser() {
+        return $.auth.validateToken();
     }
 };
 

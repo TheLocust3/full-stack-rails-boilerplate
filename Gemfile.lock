@@ -62,10 +62,14 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (0.1.43)
+      devise (> 3.5.2, < 4.5)
+      rails (< 6)
     erubi (1.7.0)
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    hashie (3.5.7)
     i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     listen (3.1.5)
@@ -84,6 +88,9 @@ GEM
     nio4r (2.2.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    omniauth (1.8.1)
+      hashie (>= 3.4.6, < 3.6.0)
+      rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
     pg (0.21.0)
     public_suffix (3.0.1)
@@ -180,7 +187,9 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   devise (~> 4.4.1)
+  devise_token_auth
   listen (>= 3.0.5, < 3.2)
+  omniauth
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.4)
