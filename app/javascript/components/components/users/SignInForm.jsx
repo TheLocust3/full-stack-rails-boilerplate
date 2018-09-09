@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
+import Form from '../base/Form';
 
 export default class SignInForm extends React.Component {
     constructor(props) {
@@ -32,20 +33,14 @@ export default class SignInForm extends React.Component {
             })
             .catch((response) => {
                 this.setState({
-                    error: response.responseJSON.error
+                    errors: response.data.errors
                 });
             });
     }
 
-    renderError() {
-        if (_.isEmpty(this.state.error)) return;
-
-        return <div>{this.state.error}</div>;
-    }
-
-    renderInputs() {
+    render() {
         return (
-            <div>
+            <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
                 Email:&nbsp;
                 <input type="email" name="email" onChange={this.handleChange.bind(this)} />
                 <br />
@@ -56,20 +51,10 @@ export default class SignInForm extends React.Component {
                 <br />
                 Remember Me:&nbsp;
                 <input type="checkbox" name="rememberMe" onChange={this.handleCheckbox.bind(this)} />
-            </div>
-        );
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.renderInputs()}
-                <input type="submit" style={{ visibility: 'hidden' }} />
                 <br />
-
+                <br />
                 <button type="submit">Sign In</button>
-                {this.renderError()}
-            </form>
+            </Form>
         );
     }
 }

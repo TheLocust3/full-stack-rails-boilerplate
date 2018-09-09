@@ -8,7 +8,6 @@ export default class ForgotPasswordContainer extends React.Component {
         return (
             <div>
                 <ForgotPasswordForm redirectUrl="/" />
-                <br />
                 <Link to="/sign_in">Sign in</Link>
                 <br />
             </div>

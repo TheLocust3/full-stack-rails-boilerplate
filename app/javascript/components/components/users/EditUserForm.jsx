@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
 
+import Form from '../base/Form';
+
 export default class EditUserForm extends React.Component {
     constructor(props) {
         super(props);
@@ -19,53 +21,39 @@ export default class EditUserForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        AuthApi.editUser(this.state.email, this.state.currentPassword, this.state.password, this.state.passwordConfirmation, this.state.name)
+        AuthApi.editUser(this.state.email, this.state.password, this.state.passwordConfirmation, this.state.name)
             .then(() => {
                 window.location.href = this.props.redirectUrl;
             })
             .catch((response) => {
                 this.setState({
-                    errors: response.responseJSON.errors
+                    errors: response.data.errors
                 });
             });
     }
 
-    renderInputs() {
+    render() {
         return (
-            <div>
+            <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
                 Email:&nbsp;
-                <input type="email" name="email" onChange={this.handleChange.bind(this)} defaultValue={this.state.email} /> {this.state.errors.email}
+                <input type="email" name="email" onChange={this.handleChange.bind(this)} defaultValue={this.state.email} />
                 <br />
                 <br />
                 Name:&nbsp;
-                <input type="text" name="name" onChange={this.handleChange.bind(this)} defaultValue={this.state.name} /> {this.state.errors.name}
+                <input type="text" name="name" onChange={this.handleChange.bind(this)} defaultValue={this.state.name} />
                 <br />
-                <br />
-                <br />
-                Current Password:&nbsp;
-                <input type="password" name="currentPassword" onChange={this.handleChange.bind(this)} /> {this.state.errors.current_password}
                 <br />
                 <br />
                 New Password:&nbsp;
-                <input type="password" name="password" onChange={this.handleChange.bind(this)} /> {this.state.errors.password}
+                <input type="password" name="password" onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
                 New Password Confirmation:&nbsp;
-                <input type="password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />{' '}
-                {this.state.errors.password_confirmation}
-            </div>
-        );
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.renderInputs()}
-                <input type="submit" style={{ visibility: 'hidden' }} />
+                <input type="password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
                 <br />
-
+                <br />
                 <button type="submit">Submit</button>
-            </form>
+            </Form>
         );
     }
 }

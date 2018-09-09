@@ -8,7 +8,6 @@ export default class SignUpContainer extends React.Component {
         return (
             <div>
                 <RegisterForm redirectUrl="/" />
-                <br />
                 <Link to="/sign_in">Sign in</Link>
                 <br />
             </div>

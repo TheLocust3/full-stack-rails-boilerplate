@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
 
+import Form from '../base/Form';
+
 export default class ForgotPasswordForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: null, errors: {} };
+        this.state = { errors: {} };
     }
 
     handleChange(event) {
@@ -20,36 +22,27 @@ export default class ForgotPasswordForm extends React.Component {
         event.preventDefault();
 
         AuthApi.forgotPassword(this.state.email)
-            .then((response) => {
+            .then(() => {
                 window.location.href = this.props.redirectUrl;
             })
             .catch((response) => {
                 this.setState({
-                    errors: response.responseJSON.errors
+                    errors: response.data.errors
                 });
             });
     }
 
-    renderInputs() {
-        return (
-            <div>
-                Email:&nbsp;
-                <input type="email" name="email" onChange={this.handleChange.bind(this)} /> {this.state.errors.email}
-            </div>
-        );
-    }
-
     render() {
         return (
-            <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.renderInputs()}
-                <input type="submit" style={{ visibility: 'hidden' }} />
+            <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
+                Email:&nbsp;
+                <input type="email" name="email" onChange={this.handleChange.bind(this)} /> {this.state.errors.email}
                 <br />
-
+                <br />
                 <button type="submit" onClick={this.handleSubmit.bind(this)}>
                     Reset Password
                 </button>
-            </form>
+            </Form>
         );
     }
 }
