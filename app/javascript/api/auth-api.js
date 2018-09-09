@@ -12,28 +12,23 @@ let AuthApi = {
         return $.auth.signOut();
     },
 
-    register(email, password, passwordConfirmation, firstName, lastName) {
+    register(email, password, passwordConfirmation, name) {
         return $.auth.emailSignUp({
             email: email,
             password: password,
             password_confirmation: passwordConfirmation,
-            first_name: firstName,
-            last_name: lastName
+            name: name
         });
     },
 
-    editUser(email, password, passwordConfirmation, firstName, lastName) {
+    editUser(email, password, passwordConfirmation, name) {
         let hash = {};
         if (!_.isEmpty(email)) {
             hash.email = email;
         }
 
-        if (!_.isEmpty(firstName)) {
-            hash.first_name = firstName;
-        }
-
-        if (!_.isEmpty(lastName)) {
-            hash.last_name = lastName;
+        if (!_.isEmpty(name)) {
+            hash.name = name;
         }
 
         return $.auth.updateAccount(hash).then((user) => {

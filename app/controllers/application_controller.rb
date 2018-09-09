@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   respond_to :json
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :first_name, :last_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :first_name, :last_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :name])
   end
 
   def render_success

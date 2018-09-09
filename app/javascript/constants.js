@@ -1,7 +1,7 @@
 import $ from 'jquery';
+import * as Auth from 'j-toker';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import * as Auth from 'j-toker';
 
 import reducer from './components/reducers/root-reducer';
 import { DEVELOPMENT } from './features';
@@ -15,7 +15,7 @@ $.ajaxSetup({
     }
 });
 
-const API_URL = DEVELOPMENT ? 'http://127.0.0.1:2000/' : 'http://api.example.com/';
+const API_URL = DEVELOPMENT ? 'http://127.0.0.1:2000' : 'https://api.example.com';
 
 $.auth.configure({
     apiUrl: API_URL,

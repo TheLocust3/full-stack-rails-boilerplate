@@ -10,8 +10,7 @@ export default class RegisterForm extends React.Component {
 
         this.state = {
             email: null,
-            firstName: null,
-            lastName: null,
+            name: null,
             password: null,
             passwordConfirmation: null,
             errors: {}
@@ -27,8 +26,8 @@ export default class RegisterForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        AuthApi.register(this.state.email, this.state.password, this.state.passwordConfirmation, this.state.firstName, this.state.lastName)
-            .then((response) => {
+        AuthApi.register(this.state.email, this.state.password, this.state.passwordConfirmation, this.state.name)
+            .then(() => {
                 window.location.href = this.props.redirectUrl;
             })
             .catch((response) => {
@@ -45,12 +44,8 @@ export default class RegisterForm extends React.Component {
                 <input type="email" name="email" onChange={this.handleChange.bind(this)} /> {this.state.errors.email}
                 <br />
                 <br />
-                First Name:&nbsp;
-                <input type="text" name="firstName" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                Last Name:&nbsp;
-                <input type="text" name="lastName" onChange={this.handleChange.bind(this)} />
+                Name:&nbsp;
+                <input type="text" name="name" onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
                 Password:&nbsp;

@@ -12,7 +12,7 @@ class Index extends React.Component {
     }
 
     handleSignOut() {
-        AuthApi.signOut().then((response) => {
+        AuthApi.signOut().then(() => {
             window.location.href = '/';
         });
     }
@@ -35,7 +35,6 @@ class Index extends React.Component {
                         Sign Out
                     </a>
                     <br />
-                    Hello {this.props.user.first_name} {this.props.user.last_name}!
                 </div>
             );
         }
@@ -48,7 +47,7 @@ class Index extends React.Component {
             <div>
                 {this.renderUserActions()}
                 <br />
-                Hello World!
+                Hello {this.props.user.name}
             </div>
         );
     }
@@ -57,7 +56,7 @@ class Index extends React.Component {
 function mapStateToProps(state) {
     return {
         isReady: state.users.isReady,
-        user: state.users.user
+        user: state.users.currentUser
     };
 }
 

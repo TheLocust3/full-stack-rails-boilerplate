@@ -27,7 +27,7 @@ export default class SignInForm extends React.Component {
         event.preventDefault();
 
         AuthApi.signIn(this.state.email, this.state.password, this.state.rememberMe)
-            .then((response) => {
+            .then(() => {
                 window.location.href = this.props.redirectUrl;
             })
             .catch((response) => {

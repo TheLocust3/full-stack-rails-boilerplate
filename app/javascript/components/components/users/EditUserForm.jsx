@@ -7,7 +7,7 @@ export default class EditUserForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: this.props.user.email, firstName: this.props.user.first_name, lastName: this.props.user.last_name, errors: {} };
+        this.state = { email: this.props.user.email, name: this.props.user.name, errors: {} };
     }
 
     handleChange(event) {
@@ -19,15 +19,8 @@ export default class EditUserForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        AuthApi.editUser(
-            this.state.email,
-            this.state.currentPassword,
-            this.state.password,
-            this.state.passwordConfirmation,
-            this.state.firstName,
-            this.state.lastName
-        )
-            .then((response) => {
+        AuthApi.editUser(this.state.email, this.state.currentPassword, this.state.password, this.state.passwordConfirmation, this.state.name)
+            .then(() => {
                 window.location.href = this.props.redirectUrl;
             })
             .catch((response) => {
@@ -44,14 +37,8 @@ export default class EditUserForm extends React.Component {
                 <input type="email" name="email" onChange={this.handleChange.bind(this)} defaultValue={this.state.email} /> {this.state.errors.email}
                 <br />
                 <br />
-                First Name:&nbsp;
-                <input type="text" name="firstName" onChange={this.handleChange.bind(this)} defaultValue={this.state.firstName} />{' '}
-                {this.state.errors.first_name}
-                <br />
-                <br />
-                Last Name:&nbsp;
-                <input type="text" name="lastName" onChange={this.handleChange.bind(this)} defaultValue={this.state.lastName} />{' '}
-                {this.state.errors.last_name}
+                Name:&nbsp;
+                <input type="text" name="name" onChange={this.handleChange.bind(this)} defaultValue={this.state.name} /> {this.state.errors.name}
                 <br />
                 <br />
                 <br />
