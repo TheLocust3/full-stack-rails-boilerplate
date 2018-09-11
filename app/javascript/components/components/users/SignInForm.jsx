@@ -2,14 +2,17 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { setCookie, getCookie } from '../../../helpers';
 import AuthApi from '../../../api/auth-api';
+
 import Form from '../base/Form';
 
 export default class SignInForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { email: null, password: null, rememberMe: false, error: '' };
+        let email = getCookie('email');
+        this.state = { email: email, rememberMe: !_.isEmpty(email), error: '' };
     }
 
     handleChange(event) {
@@ -27,6 +30,12 @@ export default class SignInForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
+        if (this.state.rememberMe) {
+            setCookie('email', this.state.email, 14);
+        } else {
+            setCookie('email', '', 14);
+        }
+
         AuthApi.signIn(this.state.email, this.state.password, this.state.rememberMe)
             .then(() => {
                 window.location.href = this.props.redirectUrl;
@@ -42,7 +51,7 @@ export default class SignInForm extends React.Component {
         return (
             <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
                 Email:&nbsp;
-                <input type="email" name="email" onChange={this.handleChange.bind(this)} />
+                <input type="email" name="email" defaultValue={this.state.email} onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
                 Password:&nbsp;
@@ -50,7 +59,7 @@ export default class SignInForm extends React.Component {
                 <br />
                 <br />
                 Remember Me:&nbsp;
-                <input type="checkbox" name="rememberMe" onChange={this.handleCheckbox.bind(this)} />
+                <input type="checkbox" name="rememberMe" defaultChecked={this.state.rememberMe} onChange={this.handleCheckbox.bind(this)} />
                 <br />
                 <br />
                 <button type="submit">Sign In</button>
