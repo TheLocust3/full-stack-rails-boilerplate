@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
 
+import TextField from '../elements/TextField';
+import Button from '../elements/Button';
 import Form from '../base/Form';
 
 export default class ForgotPasswordForm extends React.Component {
@@ -35,13 +37,11 @@ export default class ForgotPasswordForm extends React.Component {
     render() {
         return (
             <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
-                Email:&nbsp;
-                <input type="email" name="email" onChange={this.handleChange.bind(this)} /> {this.state.errors.email}
+                <TextField type="email" label="Email" name="email" onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
-                <button type="submit" onClick={this.handleSubmit.bind(this)}>
-                    Reset Password
-                </button>
+
+                <Button type="submit">Reset Password</Button>
             </Form>
         );
     }

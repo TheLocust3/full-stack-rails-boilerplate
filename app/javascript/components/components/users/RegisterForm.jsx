@@ -3,6 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
+
+import TextField from '../elements/TextField';
+import Button from '../elements/Button';
 import Form from '../base/Form';
 
 export default class RegisterForm extends React.Component {
@@ -35,23 +38,20 @@ export default class RegisterForm extends React.Component {
     render() {
         return (
             <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
-                Email:&nbsp;
-                <input type="email" name="email" onChange={this.handleChange.bind(this)} />
+                <TextField type="email" label="Email" name="email" onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField label="Name" name="name" onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField type="password" label="Password" name="password" onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField type="password" label="Confirm Password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
-                Name:&nbsp;
-                <input type="text" name="name" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                Password:&nbsp;
-                <input type="password" name="password" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                Confirm Password:&nbsp;
-                <input type="password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                <button type="submit">Register</button>
+
+                <Button type="submit">Register</Button>
             </Form>
         );
     }

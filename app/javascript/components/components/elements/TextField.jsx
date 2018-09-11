@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MDCTextField } from '@material/textfield';
 
-import { uuid } from '../helpers';
+import { uuid } from '../../../helpers';
 
 export default class TextField extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -33,7 +32,21 @@ export default class TextField extends React.Component {
     }
 
     render() {
-        let { className, textFieldClassName, labelClassName, style, label, defaultValue, onChange, required, value, type, size, dense, ...props } = this.props;
+        let {
+            className,
+            textFieldClassName,
+            labelClassName,
+            style,
+            label,
+            defaultValue,
+            onChange,
+            required,
+            value,
+            type,
+            size,
+            dense,
+            ...props
+        } = this.props;
 
         className = _.isEmpty(className) ? '' : className;
         textFieldClassName = _.isEmpty(textFieldClassName) ? '' : textFieldClassName;
@@ -43,11 +56,26 @@ export default class TextField extends React.Component {
         type = _.isEmpty(type) ? 'text' : type;
 
         return (
-            <div id={this.state.uuid} className={`mdc-text-field ${denseClassName} textfield ${className}`} data-mdc-auto-init='MDCTextField' style={style}>
-                <input type={type} id={`${this.state.uuid}--inner`} className={`mdc-text-field__input mdc-typography--body2 ${textFieldClassName}`} onChange={onChange} value={value} size={size} required={required} {...props} />
-                <label className={`mdc-floating-label mdc-typography--body2 ${labelClassName}`} htmlFor={`${this.state.uuid}--inner`}>{label}</label>
+            <div
+                id={this.state.uuid}
+                className={`mdc-text-field ${denseClassName} textfield ${className}`}
+                data-mdc-auto-init="MDCTextField"
+                style={style}>
+                <input
+                    type={type}
+                    id={`${this.state.uuid}--inner`}
+                    className={`mdc-text-field__input mdc-typography--body2 ${textFieldClassName}`}
+                    onChange={onChange}
+                    value={value}
+                    size={size}
+                    required={required}
+                    {...props}
+                />
+                <label className={`mdc-floating-label mdc-typography--body2 ${labelClassName}`} htmlFor={`${this.state.uuid}--inner`}>
+                    {label}
+                </label>
 
-                <div className='mdc-line-ripple' />
+                <div className="mdc-line-ripple" />
             </div>
         );
     }

@@ -3,12 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MDCSelect } from '@material/select';
 
-import { uuid } from '../helpers';
+import { uuid } from '../../../helpers';
 
 import Text from './Text';
 
 export default class Select extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -36,18 +35,22 @@ export default class Select extends React.Component {
         className = _.isEmpty(className) ? '' : className;
 
         return (
-            <div className={`mdc-select ${className}`} id={this.state.uuid} role='listbox' data-mdc-auto-init='MDCSelect' {...props}>
-                <select onChange={(event) => { this.props.onChange(event.target) }} className='mdc-select__native-control mdc-typography--body2' required={required} disabled={disabled}>
+            <div className={`mdc-select ${className}`} id={this.state.uuid} role="listbox" data-mdc-auto-init="MDCSelect" {...props}>
+                <select
+                    onChange={(event) => {
+                        this.props.onChange(event.target);
+                    }}
+                    className="mdc-select__native-control mdc-typography--body2"
+                    required={required}
+                    disabled={disabled}>
                     {children}
                 </select>
 
-                <label className='mdc-floating-label'>
-                    <Text type='body2'>
-                        {label}
-                    </Text>
+                <label className="mdc-floating-label">
+                    <Text type="body2">{label}</Text>
                 </label>
-                
-                <div className='mdc-line-ripple' />
+
+                <div className="mdc-line-ripple" />
             </div>
         );
     }

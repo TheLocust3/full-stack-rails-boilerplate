@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
 
+import TextField from '../elements/TextField';
+import Button from '../elements/Button';
 import Form from '../base/Form';
 
 export default class EditUserForm extends React.Component {
@@ -35,24 +37,21 @@ export default class EditUserForm extends React.Component {
     render() {
         return (
             <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
-                Email:&nbsp;
-                <input type="email" name="email" onChange={this.handleChange.bind(this)} defaultValue={this.state.email} />
+                <TextField type="email" label="Email" name="email" defaultValue={this.state.email} onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField label="Name" name="name" defaultValue={this.state.name} onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
-                Name:&nbsp;
-                <input type="text" name="name" onChange={this.handleChange.bind(this)} defaultValue={this.state.name} />
+
+                <TextField type="password" label="New Password" name="password" onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField type="password" label="New Password Confirmation" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
-                <br />
-                New Password:&nbsp;
-                <input type="password" name="password" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                New Password Confirmation:&nbsp;
-                <input type="password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                <button type="submit">Submit</button>
+
+                <Button type="submit">Submit</Button>
             </Form>
         );
     }

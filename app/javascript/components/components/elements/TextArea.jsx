@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MDCTextField } from '@material/textfield';
 
-import { uuid } from '../helpers';
-
-import Text from './Text';
+import { uuid } from '../../../helpers';
 
 export default class TextField extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -40,12 +37,26 @@ export default class TextField extends React.Component {
         className = _.isEmpty(className) ? '' : className;
 
         return (
-            <div id={this.state.uuid} className={`mdc-text-field mdc-text-field--textarea textarea ${className}`} data-mdc-auto-init='MDCTextField' style={style}>
-                <textarea type='text' name={name} className='mdc-text-field__input mdc-typography--body2' onChange={onChange} value={value} rows={rows} cols={cols} required={required} {...props} />
+            <div
+                id={this.state.uuid}
+                className={`mdc-text-field mdc-text-field--textarea textarea ${className}`}
+                data-mdc-auto-init="MDCTextField"
+                style={style}>
+                <textarea
+                    type="text"
+                    name={name}
+                    className="mdc-text-field__input mdc-typography--body2"
+                    onChange={onChange}
+                    value={value}
+                    rows={rows}
+                    cols={cols}
+                    required={required}
+                    {...props}
+                />
 
-                <label className='mdc-floating-label mdc-typography--body2'>{label}</label>
+                <label className="mdc-floating-label mdc-typography--body2">{label}</label>
 
-                <div className='mdc-line-ripple' />
+                <div className="mdc-line-ripple" />
             </div>
         );
     }

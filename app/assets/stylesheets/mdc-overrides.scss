@@ -1,0 +1,28 @@
+.textfield {
+    width: 100%;
+}
+
+.textarea {
+    width: 100%;
+}
+
+.form {
+    position: relative;
+    max-width: 750px;
+}
+
+.checkbox-wrapper {
+    position: relative;
+    margin-left: -10px;
+
+    display: inline-block;
+}
+
+.checkbox-label {
+    position: absolute;
+    top: 50%;
+
+    width: 60vw;
+
+    transform: translate(0, -50%);
+}

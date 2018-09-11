@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AuthApi from '../../../api/auth-api';
+
+import TextField from '../elements/TextField';
+import Button from '../elements/Button';
 import Form from '../base/Form';
 
 export default class ResetPasswordForm extends React.Component {
@@ -34,17 +37,14 @@ export default class ResetPasswordForm extends React.Component {
     render() {
         return (
             <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
-                Password:&nbsp;
-                <input type="password" name="password" onChange={this.handleChange.bind(this)} />
+                <TextField type="password" label="Password" name="password" onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField type="password" label="Confirm Password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
+
                 <br />
                 <br />
-                Confirm Password:&nbsp;
-                <input type="password" name="passwordConfirmation" onChange={this.handleChange.bind(this)} />
-                <br />
-                <br />
-                <button type="submit" onClick={this.handleSubmit.bind(this)}>
-                    Reset Password
-                </button>
+                <Button type="submit">Reset Password</Button>
             </Form>
         );
     }

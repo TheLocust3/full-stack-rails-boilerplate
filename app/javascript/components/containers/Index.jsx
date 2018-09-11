@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { fetchCurrentUser } from '../actions/user-actions';
 import AuthApi from '../../api/auth-api';
 
+import Text from '../components/elements/Text';
+
 class Index extends React.Component {
     componentWillMount() {
         this.props.dispatch(fetchCurrentUser());
@@ -21,20 +23,25 @@ class Index extends React.Component {
         if (_.isEmpty(this.props.user)) {
             return (
                 <div>
-                    <Link to="/sign_in">Sign In</Link>
-                    &nbsp;|&nbsp;
-                    <Link to="/sign_up">Sign Up</Link>
+                    <Link to="/sign_in">
+                        <Text type="body2">Sign In</Text>
+                    </Link>
+
+                    <Link to="/sign_up">
+                        <Text type="body2">Sign Up</Text>
+                    </Link>
                 </div>
             );
         } else {
             return (
                 <div>
-                    <Link to="/users/edit">Edit User</Link>
-                    &nbsp;|&nbsp;
-                    <a href="" onClick={this.handleSignOut.bind(this)}>
-                        Sign Out
+                    <Link to="/users/edit">
+                        <Text type="body2">Edit User</Text>
+                    </Link>
+
+                    <a href="#" onClick={this.handleSignOut.bind(this)}>
+                        <Text type="body2">Sign Out</Text>
                     </a>
-                    <br />
                 </div>
             );
         }
@@ -44,10 +51,10 @@ class Index extends React.Component {
         if (!this.props.isReady) return null;
 
         return (
-            <div>
+            <div className="content">
                 {this.renderUserActions()}
                 <br />
-                Hello {this.props.user.name}
+                <Text type="body2">Hello {this.props.user.name}</Text>
             </div>
         );
     }

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import EditUserForm from '../../components/users/EditUserForm';
 import { fetchCurrentUser } from '../../actions/user-actions';
+
+import MDCAutoInit from '../../components/base/MDCAutoInit';
+import EditUserForm from '../../components/users/EditUserForm';
 
 class EditUserContainer extends React.Component {
     componentWillMount() {
@@ -14,8 +15,10 @@ class EditUserContainer extends React.Component {
         if (!this.props.isReady) return null;
 
         return (
-            <div>
+            <div className="content">
                 <EditUserForm redirectUrl="/" user={this.props.user} />
+
+                <MDCAutoInit />
             </div>
         );
     }

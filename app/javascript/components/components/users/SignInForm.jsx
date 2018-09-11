@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { setCookie, getCookie } from '../../../helpers';
 import AuthApi from '../../../api/auth-api';
 
+import TextField from '../elements/TextField';
+import Button from '../elements/Button';
+import Checkbox from '../elements/Checkbox';
 import Form from '../base/Form';
 
 export default class SignInForm extends React.Component {
@@ -50,19 +53,18 @@ export default class SignInForm extends React.Component {
     render() {
         return (
             <Form handleSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}>
-                Email:&nbsp;
-                <input type="email" name="email" defaultValue={this.state.email} onChange={this.handleChange.bind(this)} />
+                <TextField type="email" label="Email" name="email" defaultValue={this.state.email} onChange={this.handleChange.bind(this)} />
+                <br />
+
+                <TextField type="password" label="Password" name="password" onChange={this.handleChange.bind(this)} />
                 <br />
                 <br />
-                Password:&nbsp;
-                <input type="password" name="password" onChange={this.handleChange.bind(this)} />
+
+                <Checkbox label="Remember Me" defaultChecked={this.state.rememberMe} onChange={this.handleCheckbox.bind(this)} />
                 <br />
                 <br />
-                Remember Me:&nbsp;
-                <input type="checkbox" name="rememberMe" defaultChecked={this.state.rememberMe} onChange={this.handleCheckbox.bind(this)} />
-                <br />
-                <br />
-                <button type="submit">Sign In</button>
+
+                <Button type="submit">Sign In</Button>
             </Form>
         );
     }
