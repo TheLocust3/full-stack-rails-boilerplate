@@ -50,5 +50,4 @@ With your instance setup, you can now run `deploy/deploy.sh` from your computer 
 ### To-do
 
 -   Create ec2 and deployment roles with terraform
--   Get remember me working again
 -   Update Terraform (no certbot)
