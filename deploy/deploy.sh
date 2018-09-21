@@ -3,10 +3,10 @@
 set -e
 
 NAME=test
-BUCKET=jakekinsella-$NAME
+BUCKET=test-$NAME
 DEPLOYMENT_GROUP=production
 
-git archive --format=tar.gz -9 -o deploy.tar.gz HEAD
+tar -czvf deploy.tar.gz *
 
 aws s3 mb s3://$BUCKET
 aws s3 rm s3://$BUCKET/deploy.tar.gz
