@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
+import { Text, MDCAutoInit } from 'react-material-components-web';
 
-import Text from '../../components/elements/Text';
-import MDCAutoInit from '../../components/base/MDCAutoInit';
 import ResetPasswordForm from '../../components/users/ResetPasswordForm';
 
 export default class ResetPasswordContainer extends React.Component {

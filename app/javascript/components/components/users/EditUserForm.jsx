@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TextField, Button } from 'react-material-components-web';
 
 import AuthApi from '../../../api/auth-api';
 
-import TextField from '../elements/TextField';
-import Button from '../elements/Button';
 import Form from '../base/Form';
 
 export default class EditUserForm extends React.Component {

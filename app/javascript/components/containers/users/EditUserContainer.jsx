@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { MDCAutoInit } from 'react-material-components-web';
 
 import { fetchCurrentUser } from '../../actions/user-actions';
 
-import MDCAutoInit from '../../components/base/MDCAutoInit';
 import EditUserForm from '../../components/users/EditUserForm';
 
 class EditUserContainer extends React.Component {

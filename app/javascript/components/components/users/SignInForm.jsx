@@ -1,13 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TextField, Button, Checkbox } from 'react-material-components-web';
 
 import { setCookie, getCookie } from '../../../helpers';
 import AuthApi from '../../../api/auth-api';
 
-import TextField from '../elements/TextField';
-import Button from '../elements/Button';
-import Checkbox from '../elements/Checkbox';
 import Form from '../base/Form';
 
 export default class SignInForm extends React.Component {

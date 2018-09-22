@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Text, MDCAutoInit } from 'react-material-components-web';
 
-import Text from '../../components/elements/Text';
-import MDCAutoInit from '../../components/base/MDCAutoInit';
 import SignInForm from '../../components/users/SignInForm';
 
 export default class SignInContainer extends React.Component {

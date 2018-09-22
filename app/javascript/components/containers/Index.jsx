@@ -2,11 +2,10 @@ import _ from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Text } from 'react-material-components-web';
 
 import { fetchCurrentUser } from '../actions/user-actions';
 import AuthApi from '../../api/auth-api';
-
-import Text from '../components/elements/Text';
 
 class Index extends React.Component {
     componentWillMount() {
